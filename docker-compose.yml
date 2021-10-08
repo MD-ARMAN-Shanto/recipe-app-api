@@ -1,0 +1,17 @@
+# first line is the version of the docker compose I am going to used
+version: "3"
+# second line is the services I am going to used in this project
+# app is my service name then build is the second step where my app is going to build after I set up a context dot(.) means build my app from the root
+# then initializing the ports to host 8000 to port 8000 in the docker images
+# next step is set the volumes which means if any code updated in the local then can easily updated also in the docker containers
+# set the command to run the project for next line command use > symbol to write in next line
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - "8050:8000"
+    volumes:
+      - ./app:/app
+    command: >
+      sh -c "python3 manage.py runserver 0.0.0.0:8050"
