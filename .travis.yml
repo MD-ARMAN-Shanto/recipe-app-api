@@ -9,4 +9,3 @@ before_script: pip3 install docker-compose
 
 script:
   - docker-compose run app sh -c "python3 manage.py test && flake8"
-
