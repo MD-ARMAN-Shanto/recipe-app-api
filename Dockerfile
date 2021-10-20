@@ -17,6 +17,8 @@ COPY ./app /app
 
 # create a user with a username for security purpose using adduser command user is the username here
 RUN adduser -D user
+RUN chown user:user -R /app/
+RUN chmod +x /app
 USER user
 
 
