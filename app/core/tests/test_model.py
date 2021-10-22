@@ -23,3 +23,8 @@ class TestUserModel(TestCase):
             password='test123456'
         )
         self.assertEqual(user.email, email.lower())
+
+    def test_user_email_not_given(self):
+        """The email is not given then raise an exception"""
+        with self.assertRaises(ValueError):
+            get_user_model().objects.create_user(None, 'test123')
