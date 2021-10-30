@@ -8,7 +8,13 @@ ENV PYTHONUNBUFFERED 1
 
 # first copy the requirements.txt file from the root directory and create a file in the docker container then run the requirements.txt file in the docker container.
 COPY ./requirements.txt /requirements.txt
+# Run the postgres client and then download the necessary dependencies while running the postgres client.
+RUN apk add --update --no-cache postgresql-client
+RUN apk add --update --no-cache --virtual .tmp-builds-deps \
+        gcc libc-dev linux-headers postgresql-dev
 RUN pip3 install -r /requirements.txt
+# after download the postgresql client with necessary dependencies then delete the dependencies running the command
+RUN apk del .tmp-builds-deps
 
 # first run a directory in the docker image then tells docker container that our main working directory is the /app level then copy our  local directory to docker container
 RUN mkdir /app
